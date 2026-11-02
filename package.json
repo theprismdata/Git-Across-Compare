@@ -3,7 +3,12 @@
   "displayName": "Git Across Compare — 브랜치 비교·병합",
   "description": "두 git 브랜치를 좌우로 나란히 비교하고, 파일 단위로 가져오기·삭제·병합합니다",
   "version": "0.0.1",
-  "publisher": "theprismdata",
+  "publisher": "hongjoongshin",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1b2130",
+    "theme": "dark"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,6 +23,16 @@
   },
   "categories": [
     "SCM Providers"
+  ],
+  "keywords": [
+    "git",
+    "branch",
+    "compare",
+    "diff",
+    "merge",
+    "folder compare",
+    "브랜치",
+    "비교"
   ],
   "extensionDependencies": [
     "vscode.git"
