@@ -1,0 +1,219 @@
+{
+  "name": "git-across-compare",
+  "displayName": "Git Across Compare — 브랜치 비교·병합",
+  "description": "두 git 브랜치를 좌우로 나란히 비교하고, 파일 단위로 가져오기·삭제·병합합니다",
+  "version": "0.0.1",
+  "publisher": "theprismdata",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theprismdata/Git-Across-Compare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/theprismdata/Git-Across-Compare/issues"
+  },
+  "homepage": "https://github.com/theprismdata/Git-Across-Compare#readme",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "SCM Providers"
+  ],
+  "extensionDependencies": [
+    "vscode.git"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "branchCompare": [
+        {
+          "type": "webview",
+          "id": "branchCompare.selector",
+          "name": "브랜치 선택"
+        },
+        {
+          "id": "branchCompare.history",
+          "name": "커밋 히스토리"
+        },
+        {
+          "id": "branchCompare.changes",
+          "name": "변경 파일"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "branchCompare.selectBase",
+        "title": "기준 브랜치 선택",
+        "category": "브랜치 비교",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "branchCompare.selectCompare",
+        "title": "비교 브랜치 선택",
+        "category": "브랜치 비교",
+        "icon": "$(git-compare)"
+      },
+      {
+        "command": "branchCompare.swap",
+        "title": "기준/비교 브랜치 바꾸기",
+        "category": "브랜치 비교",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "branchCompare.refresh",
+        "title": "새로고침",
+        "category": "브랜치 비교",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "branchCompare.openAll",
+        "title": "변경 파일 전체 보기",
+        "category": "브랜치 비교",
+        "icon": "$(diff-multiple)"
+      },
+      {
+        "command": "branchCompare.merge",
+        "title": "비교 브랜치를 기준 브랜치로 병합",
+        "category": "브랜치 비교",
+        "icon": "$(git-merge)"
+      },
+      {
+        "command": "branchCompare.openDiff",
+        "title": "diff 열기",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.openConflict",
+        "title": "병합 편집기로 열기",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.openCommitDiff",
+        "title": "커밋 diff 열기",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.openFolderCompare",
+        "title": "폴더 비교 열기",
+        "category": "브랜치 비교",
+        "icon": "$(files)"
+      },
+      {
+        "command": "branchCompare.importFile",
+        "title": "반대편 버전으로 가져오기 (작업 트리)",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.removeFile",
+        "title": "작업 트리에서 삭제 (반대편에 없음)",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.openWorkingFile",
+        "title": "작업 트리 파일 열기",
+        "category": "브랜치 비교"
+      },
+      {
+        "command": "branchCompare.copyPath",
+        "title": "경로 복사",
+        "category": "브랜치 비교"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "branchCompare.openFolderCompare",
+          "when": "view == branchCompare.changes",
+          "group": "navigation@1"
+        },
+        {
+          "command": "branchCompare.openAll",
+          "when": "view == branchCompare.changes",
+          "group": "navigation@4"
+        },
+        {
+          "command": "branchCompare.refresh",
+          "when": "view == branchCompare.changes",
+          "group": "navigation@6"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "branchCompare.openDiff",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.openConflict",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.openCommitDiff",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.importFile",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.removeFile",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.openWorkingFile",
+          "when": "false"
+        },
+        {
+          "command": "branchCompare.copyPath",
+          "when": "false"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "branchCompare.openDiff",
+          "when": "view == branchCompare.changes && viewItem =~ /^diff/",
+          "group": "1_open@1"
+        },
+        {
+          "command": "branchCompare.openWorkingFile",
+          "when": "view == branchCompare.changes && viewItem =~ /^diff/",
+          "group": "1_open@2"
+        },
+        {
+          "command": "branchCompare.importFile",
+          "when": "view == branchCompare.changes && viewItem =~ /:import/",
+          "group": "2_sync@1"
+        },
+        {
+          "command": "branchCompare.removeFile",
+          "when": "view == branchCompare.changes && viewItem =~ /:remove/",
+          "group": "2_sync@2"
+        },
+        {
+          "command": "branchCompare.copyPath",
+          "when": "view == branchCompare.changes && viewItem =~ /^diff/",
+          "group": "3_copy@1"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "branchCompare",
+          "title": "브랜치 비교",
+          "icon": "media/branch-compare.svg"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.6.0"
+  }
+}
